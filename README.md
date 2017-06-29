@@ -15,7 +15,6 @@ $ mvn exec:java -Dexec.maimClass="ps.Main"
 - Update board;
 - Checking is Draw/Win?;
 - Creating Players;
-- Who will start ?;
 - Accepting Players move;
 - Move validation;
 - Multiple games;
@@ -24,6 +23,7 @@ $ mvn exec:java -Dexec.maimClass="ps.Main"
 - Results storing;
 - Show information about state of game; 
 - Resizeable board;
+- Who will start ?;
 - Player chose condition of wining - multiple character required;
 - Exit during game;
 - Bilingual;

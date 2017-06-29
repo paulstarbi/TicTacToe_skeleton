@@ -15,18 +15,26 @@ public class BoardChecker {
         this.sign = sign;
     }
 
-    public void hitCheckerUp(int position){
-        if(board.containsKey(position-size)&&board.get(position-size)==sign){
-            int currentPosition = position-size;
-            hitCounter++;
-            hitCheckerUp(currentPosition);
+    public int hitCheckerUpDown(int startPosition){
+        int currentPosition;
+        if(startPosition<=0)startPosition+=size;
+        if(board.containsKey(startPosition)){
+            if(board.get(startPosition)==sign){
+                hitCounter++;
+            }else hitCounter--;
+            currentPosition =startPosition+size;
+            hitCheckerUpDown(currentPosition);
         }
-
-        isWin(hitCounter);
+        return hitCounter;
     }
 
-    private void isWin(int hitCounter) {
+    public boolean isWin(int position) {
+        int hitUD = hitCheckerUpDown(position-((position/size)*size));
+        if (hitUD==3) return true;
 
+        else return false;
     }
+
+
 
 }

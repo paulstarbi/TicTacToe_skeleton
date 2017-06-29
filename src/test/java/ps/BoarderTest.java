@@ -15,15 +15,17 @@ public class BoarderTest {
 
 
     BoardManager boardMan = new BoardManager();
-    BoardUpdater updater = new BoardUpdater();
-    BoardChecker checker = new BoardChecker();
 
     @DataProvider(name = "mapTester")
     public static Object[][] startEntry(){
         return new Object[][] {
         {1,"|"},{9,"|"},{5,"|"}};
     }
-
+    @DataProvider(name = "win")
+    public static Object[][] win() {
+        return new Object[][]{
+                {1, "X"}, {4, "X"}, {7, "X"}};
+    }
     @Test
     public void isCreatedBordNoEmpty(){
 
@@ -38,13 +40,18 @@ public class BoarderTest {
     }
     @Test public void isBoradUpdatesAfterMovesCorrect(){
         SortedMap<Integer,String> board = boardMan.boardCreator();
-        updater.updateBoard(3,"X",board);
         assertEquals(board.get(3),"X");
     }
 
-    @Test public void isWin(){
+    @Test(dataProvider = "win")
+    public void isWin(Integer i,String val){
+        SortedMap<Integer,String> board = boardMan.boardCreator();
+        boardMan.updateBoard(i,val);
+        assertEquals(false,boardMan.updateBoard(2,"O"));
+        assertEquals(false,boardMan.updateBoard(5,"O"));
+        assertEquals(true, boardMan.updateBoard(8,"O"));
 
-        assertTrue(checker.hitChecker(3));
+        boardMan.drawBoard();
     }
 
 }
