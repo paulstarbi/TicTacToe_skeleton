@@ -1,10 +1,10 @@
 package ps;
 
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ps.BoardGame.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.SortedMap;
 
 import static org.testng.Assert.assertEquals;
@@ -21,11 +21,12 @@ public class BoarderTest {
         return new Object[][] {
         {1,"|"},{9,"|"},{5,"|"}};
     }
-    @DataProvider(name = "win")
-    public static Object[][] win() {
-        return new Object[][]{
-                {1, "X"}, {4, "X"}, {7, "X"}};
+    @DataProvider(name = "simplePleayers")
+    public static Object[][] startPlayers(){
+        return new Object[][] {
+                {"Zupelnie Nikt","X"},{"Darth Vader","O"},{"Aragorn","O"}};
     }
+
     @Test
     public void isCreatedBordNoEmpty(){
 
@@ -40,18 +41,30 @@ public class BoarderTest {
     }
     @Test public void isBoradUpdatesAfterMovesCorrect(){
         SortedMap<Integer,String> board = boardMan.boardCreator();
-        assertEquals(board.get(3),"X");
-    }
 
-    @Test(dataProvider = "win")
-    public void isWin(Integer i,String val){
+    }
+    @Test(dataProvider = "simplePleayers")
+    public void simplePlayerCreation(String name, String sign){
+        Player p = new Player(name,sign);
+        assertEquals(p.name,name);
+        assertEquals(p.getSign(),sign);
+    }
+    @Test
+    public void isWinConditionVerticalThree(){
         SortedMap<Integer,String> board = boardMan.boardCreator();
-        boardMan.updateBoard(i,val);
-        assertEquals(false,boardMan.updateBoard(2,"O"));
-        assertEquals(false,boardMan.updateBoard(5,"O"));
-        assertEquals(true, boardMan.updateBoard(8,"O"));
+        assertFalse(boardMan.updateBoard(2,"O"));
+        assertFalse(boardMan.updateBoard(8,"O"));
+        assertTrue(boardMan.updateBoard(5,"O"));
 
-        boardMan.drawBoard();
     }
+    @Test
+    public void isWinConditionHorizontalThree(){
+        SortedMap<Integer,String> board = boardMan.boardCreator();
+        assertFalse(boardMan.updateBoard(1,"O"));
+        assertFalse(boardMan.updateBoard(3,"O"));
+        assertTrue(boardMan.updateBoard(2,"O"));
+    }
+
+
 
 }

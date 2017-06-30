@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         BoardManager boardManager = new BoardManager();
-        Stremer creator = new Stremer();
+        Stremer creator = new Stremer(System.in);
         Player p1 = creator.createPlayer();
         Player p2 = creator.createPlayer(p1.getSign());
 

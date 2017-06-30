@@ -10,17 +10,18 @@ $ mvn exec:java -Dexec.maimClass="ps.Main"
 ```
 
 # TODOs 
-- Drawing a board;
-- Do a move;
-- Update board;
-- Checking is Draw/Win?;
-- Creating Players;
-- Accepting Players move;
-- Move validation;
-- Multiple games;
+- Drawing a board; ok
+- Do a move; ok
+- Update board; ok
+- Validate move - is chosen field exist; ok
+- Is chosen field free ? ok
+- Checking is Draw/Win?; 2/4
+- Creating Players; ok
+- Accepting Players move; ok
+- Multiple games; ok 
 - Announce of results after each round; 
 - Points giver (3-win;1-draw;0-lose); 
-- Results storing;
+- Results storing; ok 
 - Show information about state of game; 
 - Resizeable board;
 - Who will start ?;
