@@ -2,7 +2,7 @@ package ps.BoardGame;
 
 import java.util.SortedMap;
 
-public class BoardChecker {
+public class WinnerChecker {
 
     SortedMap<Integer, String> board;
     int size;
@@ -10,7 +10,7 @@ public class BoardChecker {
     private int verticalCheck;
     private int horizontalCheck;
 
-    public BoardChecker(SortedMap<Integer, String> board, int size, String sign) {
+    public WinnerChecker(SortedMap<Integer, String> board, int size, String sign) {
         this.board = board;
         this.size = size;
         this.sign = sign;

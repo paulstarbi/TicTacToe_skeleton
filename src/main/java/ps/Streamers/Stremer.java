@@ -1,4 +1,6 @@
-package ps;
+package ps.Streamers;
+
+import ps.Players.Player;
 
 import java.io.InputStream;
 import java.util.InputMismatchException;
@@ -6,29 +8,19 @@ import java.util.Scanner;
 import java.util.SortedMap;
 
 public class Stremer {
-    InputStream in;
+    private InputStream in;
 
     public Stremer(InputStream in) {
         this.in = in;
     }
 
-    public Player createPlayer() {
-        return new Player(getName(),getSign());
-    }
-
-    public Player createPlayer(String sign) {
-        if(sign.equals("X"))
-        return new Player(getName(),"O");
-        else return new Player(getName(),"X");
-    }
-
-    private String getName() {
+    protected String setName() {
         Scanner keyboard = new Scanner(in);
         System.out.println("Player name: ");
         return keyboard.nextLine();
     }
 
-    private String getSign() {
+    protected String setSign() {
         Scanner keyboard = new Scanner(in);
         System.out.println("Chose sign: X or O");
         String sign = keyboard.nextLine().toUpperCase();
@@ -36,10 +28,10 @@ public class Stremer {
             return sign;
         else {
             System.out.println("Wrong choice only : O or X are avaiable");
-            return getSign();
+            return setSign();
         }
     }
-    public int doYourMove(SortedMap<Integer,String> board, Player p){
+    public int doYourMove(SortedMap<Integer, String> board, Player p){
             System.out.println("Where to put " +p.getSign());
             Scanner keyboard = new Scanner(in);
          try{   int move = keyboard.nextInt();

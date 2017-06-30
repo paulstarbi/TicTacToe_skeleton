@@ -6,17 +6,22 @@ import java.util.*;
 public class BoardManager {
 
     SortedMap<Integer, String> board;
-    int licznik;
-    int width;
+    int counter;
+    int boardWidth;
+    int boardHeight;
+    int boardLengt;
+
 
     public BoardManager() {
-        this.width = 3;
-        this.licznik=0;
+        this.boardWidth = 12;
+        this.boardHeight =16;
+        this.counter =0;
+        this.boardLengt = boardHeight *boardWidth;
     }
 
-    public  SortedMap<Integer, String> boardCreator(){
+    public SortedMap<Integer, String> boardCreator(){
         SortedMap<Integer, String> hmap= new TreeMap<>();
-        for (int i=1;i<=9;i++){
+        for (int i=1;i<=boardLengt;i++){
             hmap.put(i,"|");
         }
         this.board=hmap;
@@ -28,13 +33,13 @@ public class BoardManager {
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Map.Entry mEntry = (Map.Entry) iterator.next();
-            if (licznik!=0&&licznik%width==0)
+            if (counter!=0&& counter%boardWidth ==0)
                 System.out.println();
             if(mEntry.getValue().equals("|"))
                 System.out.printf(mEntry.getKey().toString() + mEntry.getValue());
             else
                 System.out.printf(mEntry.getValue()+"|");
-            licznik++;
+            counter++;
         }
         System.out.println();
     }
@@ -44,7 +49,7 @@ public class BoardManager {
         board.put(where,sign);}else {
             throw new InputMismatchException();
         }
-        BoardChecker checker = new BoardChecker(board,width,sign);
+        WinnerChecker checker = new WinnerChecker(board, boardWidth,sign);
         return checker.isWin(where);
     }
 }

@@ -1,15 +1,24 @@
 package ps;
 
 import ps.BoardGame.BoardManager;
+import ps.Players.Player;
+import ps.Streamers.Stremer;
 
 import java.util.SortedMap;
 
 public class GameEngine {
-    boolean win=false;
+    final int numberOfGames=3;
+    Player p1;
+    Player p2;
+    private boolean win;
 
-    int numberOfGames=3;
+    public GameEngine(Player p1, Player p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+        this.win = false;
+    }
 
-    public void play(BoardManager boardManager, Player p1, Player p2, Stremer in) {
+    void play(BoardManager boardManager, Stremer in) {
         SortedMap<Integer,String> myBoard =boardManager.boardCreator();
         Player currentPlayer = p1;
         for(int i=0;i<numberOfGames;i++){
@@ -20,14 +29,19 @@ public class GameEngine {
                     System.out.println("Congratulation "+currentPlayer.name+" win");
                     currentPlayer.pPoints+=3;
                 }
-                if(currentPlayer==p1)
-                    currentPlayer=p2;
-                else currentPlayer=p1;
             }
+            currentPlayer = switchPlayer(currentPlayer);
             win=false;
         }
         System.out.println("Final results:");
         System.out.println(p1);
         System.out.println(p2);
+    }
+
+    Player switchPlayer(Player currPlayer){
+        if(currPlayer==p1)
+            currPlayer=p2;
+        else currPlayer=p1;
+    return  currPlayer;
     }
 }

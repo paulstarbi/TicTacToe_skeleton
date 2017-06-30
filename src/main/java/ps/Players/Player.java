@@ -1,15 +1,10 @@
-package ps;
+package ps.Players;
 
-import java.util.Scanner;
+public class Player {
 
-/**
- * Created by paul on 29.06.17.
- */
-class Player {
-
-    String name;
+    public String name;
     String sign;
-    int pPoints;
+    public int pPoints;
 
     public Player() {
     }
